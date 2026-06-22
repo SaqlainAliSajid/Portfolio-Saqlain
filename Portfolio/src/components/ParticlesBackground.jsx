@@ -12,7 +12,7 @@ export default function ParticlesBackground(){
 
         let particles=[];
         const particleCount=50;
-        const colors = ["rgba(255, 255, 255, 0.7)"];
+        const colors = ["rgba(255, 255,255, 0.7)"];
 
         class Particle{
             constructor(){

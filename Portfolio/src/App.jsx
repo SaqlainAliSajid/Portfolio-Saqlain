@@ -8,11 +8,13 @@ import Contact from "./section/Contact"
 import Footer from "./section/Footer"
 import Experience from "./section/Experience"
 import ParticlesBackground from "./components/ParticlesBackground"
+import CustomCusor from "./components/CustomCusor"
 
 export default function App(){
   return(
   <div className="relative gradient">
     <ParticlesBackground/>
+    <CustomCusor/>
     <Navbar/>
     <Home/>
     <About/>
