@@ -3,7 +3,7 @@ import ParticlesBackground from "../components/ParticlesBackground";
 import {motion} from "framer-motion"
 
 export default function Home(){
-  const roles = useMemo(()=>["FullStack Developer","FrontEnd Developer","BackEnd Developer"],[])
+  const roles = useMemo(()=>["Full Stack Developer","FrontEnd Developer","BackEnd Developer"],[])
 
   const [index,setindex]=useState(0);
   const [subIndex,setSubIndex]=useState(0);
