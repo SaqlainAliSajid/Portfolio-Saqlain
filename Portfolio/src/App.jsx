@@ -9,9 +9,17 @@ import Footer from "./section/Footer"
 import Experience from "./section/Experience"
 // import ParticlesBackground from "./components/ParticlesBackground"
 import CustomCusor from "./components/CustomCusor"
+import IntroAnimation from "./components/IntroAnimation"
+import React from "react"
 
 export default function App(){
+ const [introDone,setIntroDone] = React.useState(false);
+ 
   return(
+   <>
+
+   {!introDone && <IntroAnimation onFinish={()=> setIntroDone(true)}/>}
+    {introDone && (
   <div className="relative gradient">
     {/* <ParticlesBackground/> */}
     <CustomCusor/>
@@ -25,5 +33,7 @@ export default function App(){
     <Contact/>
     <Footer/>
   </div>
+  )}
+  </>
   )
 }
