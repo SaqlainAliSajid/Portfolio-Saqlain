@@ -5,7 +5,7 @@ import img3 from "../assets/img3.PNG"
 import photo1 from "../assets/photo1.JPG"
 import photo2 from "../assets/photo2.PNG"
 import photo3 from "../assets/photo3.png"
-import { motion,useScroll,useMotionValueEvent,AnimatePresence } from "framer-motion"
+import { motion,useScroll,useMotionValueEvent,AnimatePresence,useTransform } from "framer-motion"
 
 
 const useIsMobile = (query = "(max-width : 639px)")=>{
@@ -36,19 +36,19 @@ export default function Projects(){
       {
         title: "Micasa",
         link: "https://frontend.micasa.saqlainali.tech/",
-        bgColor: "#0d4d3d",
+        bgColor: "#06261f",
         image: isMobile ? photo1 : img1, // use mobile or desktop image
       },
       {
         title: "Medi-Care",
         link: "https://gamilyapp.com/",
-        bgColor: "#0F766E",
+        bgColor: "#083d3a",
         image: isMobile ? photo2 : img2,
       },
       {
         title: "LearnX",
         link: "https://www.eathungrytiger.com/",
-        bgColor: "#1E3A8A",
+        bgColor: "#11224f",
         image: isMobile ? photo3 : img3,
       },
     ],
@@ -62,6 +62,7 @@ const {scrollYProgress} = useScroll({
 
 const thresholds = projects.map((_,i)=> (i+1)/projects.length);
 const [activeIndex,setActiveIndex] = useState(0);
+const lineHeight = useTransform(scrollYProgress, (v) => `${Math.max(8, v * 100)}%`);
 
 useMotionValueEvent(scrollYProgress , "change" , (v) => {
   const idx = thresholds.findIndex((t)=> v<=t);
@@ -82,6 +83,13 @@ const activeProject = projects[activeIndex];
         <h2 className={`text-3xl font-semibold z-10 text-center ${
           isMobile ? "mt-4" : "mt-8"
         }`}>My Work</h2>
+      <div className="pointer-events-none absolute left-4 top-1/2 hidden h-[72vh] w-1.5 -translate-y-1/2 rounded-full bg-white/10 lg:block">
+        <motion.div
+          className="absolute inset-x-0 top-0 rounded-full bg-linear-to-b from-[#1cd8d2] via-[#00bf8f] to-[#7c3aed] shadow-[0_0_24px_rgba(28,216,210,0.55)]"
+          style={{ height: lineHeight }}
+        />
+      </div>
+      <div className="pointer-events-none absolute left-4 top-1/2 hidden h-[72vh] w-px -translate-y-1/2 rounded-full bg-white/10 lg:block" />
       <div className={`relative w-full flex-1 flex items-center justify-center ${
         isMobile ? "-mt-4" : ""
       }`}>
@@ -99,7 +107,7 @@ const activeProject = projects[activeIndex];
                 animate = {{opacity : 1 , y : 0}}
                 exit = {{opacity : 0 , y : 30}}
                 transition = {{duration : 0.5 , ease: "easeOut"}}
-                className = {`block text-center text-[clamp(2rem,6vw,5rem)] text-white/95 sm:absolute sm:-top-20 sm:-left-[35%] lg:left-[-5%] sm:mb-0
+                className = {`block text-center text-[clamp(2rem,6vw,5rem)] text-white/95 sm:absolute sm:-top-20 sm:left-[-35%] lg:left-[-5%] sm:mb-0
                   italic font-semibold ${
                     isMobile ? "-mt-24" : ""
                   }
@@ -120,12 +128,15 @@ const activeProject = projects[activeIndex];
                 style={{zIndex:10 , transition: "box-shadow 250ms ease"}}
                 
                 >
+                  <div className="pointer-events-none absolute inset-0 z-10 bg-linear-to-r from-black/60 via-black/10 to-black/60" />
+                  <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-28 bg-linear-to-b from-black/65 to-transparent" />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-28 bg-linear-to-t from-black/70 to-transparent" />
                   <img src={project.image} alt={project.title} 
                   className="w-full h-full object-cover drop-shadow-xl md:drop-shadow-2xl"
                   style = {{
                     position : "relative",
                     zIndex : 10,
-                    filter : "drop-shadow(0,16px 40px rgba(0,0,0,0.65))",
+                    filter : "drop-shadow(0,16px 40px rgba(0,0,0,0.75)) brightness(0.88) contrast(1.03) saturate(0.95)",
                     transition : "filter 200ms ease"
                   }}
                   loading = "lazy"
@@ -133,7 +144,7 @@ const activeProject = projects[activeIndex];
                   <div className="pointer-events-none absolute inset-0"
                   style={{
                     zIndex : 11,
-                    background : "linear-gradient(180deg ,rgba(0,0,0,0.12) 0%,rgba(0,0,0,0) 40%"
+                    background : "linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 40%)"
                   }}></div>
               </div>
           </div>
