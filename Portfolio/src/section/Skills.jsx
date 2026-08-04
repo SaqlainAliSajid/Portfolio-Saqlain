@@ -28,7 +28,7 @@ export default function Skills(){
   const sectionRef = useRef(null);
   const trackRef =useRef(null);
   const touchY  = useRef(null);
-  const X = useMotionValue(0);
+  const x = useMotionValue(0);
 
   useEffect(()=>{
     const el = sectionRef.current;
@@ -36,56 +36,61 @@ export default function Skills(){
     const io = new IntersectionObserver((
       [entry])=>{
         setActive(entry.isIntersecting && entry.intersectionRatio > 0.1);
-      },
+      },{threshold:[0.1]}
     )
     io.observe(el);
     return ()=> io.disconnect();
   },[])
 
-  useEffect(()=>{
-    if(!active) return;
+  useEffect(() => {
+  if (!active) return;
 
-    const onWheel =(e)=> setDir(e.deltaY > 0 ? -1 : 1);
-    const onTouchStart = (e)=>(touchY.current = e.touches[0].clientY);
-    const onTouchMove = (e)=>{
-      if(touchY.current == null) return ;
-      const delta = e.touches[0].clientY - touchY.current;
-      setDir(delta > 0 ? 1 : -1 )
-      touchY.current = e.touches[0].clientY;
-    };
-    window.addEventListener("wheel",onWheel,{passive:true});
-    window.addEventListener("touchstart",onTouchStart,{passive:true});
-    window.addEventListener("touchmove",onTouchMove,{passive:true});
+ const onWheel = (e) => setDir(e.deltaY > 0 ?-1 : 1 );
 
-    return() =>{
-       window.removeEventListener("wheel",onWheel);
-       window.removeEventListener("touchstart",onTouchStart);
-       window.removeEventListener("touchmove",onTouchMove);
+  const onTouchStart = (e) => (touchY.current = e.touches[0].clientY );
+
+  const onTouchMove = (e) => {
+    if (touchY.current == null) return;
+
+    const delta = e.touches[0].clientY - touchY.current;
+    setDir(delta > 0 ? 1 : -1);
+    touchY.current = e.touches[0].clientY;
+  };
+
+  window.addEventListener("wheel", onWheel, { passive: true });
+  window.addEventListener("touchstart", onTouchStart, { passive: true });
+  window.addEventListener("touchmove", onTouchMove, { passive: true });
+
+  return () => {
+    window.removeEventListener("wheel", onWheel);
+    window.removeEventListener("touchstart", onTouchStart);
+    window.removeEventListener("touchmove", onTouchMove);
+  };
+}, [active]);
+
+  useEffect(() => {
+  let id ;
+  let last = performance.now();
+  const SPEED = 80;
+
+  const tick = (now) => {
+    const dt = (now - last) / 1000;
+    last = now;
+    let next = x.get() + dir * SPEED * dt;
+    const loop = trackRef.current?.scrollWidth / 2 || 0;
+
+    if (loop) {
+      if (next <= -loop) next += loop;
+      if (next >= 0) next -= loop;
     }
-  },[active]);
+    x.set(next);
+    id = requestAnimationFrame(tick);
+  };
 
-  useEffect(()=>{
-    let id;
-    let last = performance.now();
-    const SPEED=80;
+  id = requestAnimationFrame(tick);
 
-    const tick = (now)=>{
-      const dt = (now - last)/1000;
-      last = now;
-      let next = X.get() + SPEED*dir *dt;
-      const loop = trackRef.current?.scrollWidth/2 || 0;
-
-      if(loop){
-        if(next <= -loop) next += loop;
-        if(next >=0) next -= loop;
-      }
-      X.set(next);
-      id = requestAnimationFrame(tick);
-    }
-      id = requestAnimationFrame(tick);
-    return ()=> cancelAnimationFrame(id);
-
-  },[dir,X]);
+  return () => cancelAnimationFrame(id);
+}, [dir,x]);
 
 
   return(
@@ -108,7 +113,7 @@ export default function Skills(){
         >Modern Applications | Modern Technologies</motion.p>
         <div className="relative w-full overflow-hidden">
           <motion.div ref={trackRef} className="flex gap-10 text-6xl text-[#1cd8d2]"
-          style={{x:X,whiteSpace:"nowrap",willChange:"transform"}}
+          style={{x:x,whiteSpace:"nowrap",willChange:"transform"}}
           >
           {repeated.map((s,i)=>(
             <div key={i} className="flex flex-col items-center gap-2 min-w-30" 

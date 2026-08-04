@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import ParticlesBackground from "../components/ParticlesBackground";
 import {motion} from "framer-motion";
 import {FaGithub,FaLinkedin,FaXTwitter} from "react-icons/fa6"
-import avator from "../assets/avator.png";
+import avator3 from "../assets/avator3.png";
 
 
 const socials =[
@@ -51,16 +51,16 @@ export default function Home(){
         blur-[100px] sm:blur-[130px] md:blur-[150px]
         animate-pulse
         "></div>
-        <div className="absolute bottom-0 right-0
+        {/* <div className="absolute bottom-0 right-0
         w-[70vw] sm:w-[z-500vw] md:w-[40vw]
         h-[70vh] sm:h-[50vw] md:h-[40vw]
         max-w-500 max-h-500
         rounded-full 
-        bg-linear-to-r from-[#302b63] via-[#00bf8f] to-[#1cd8d2]
+         bg-linear-to-r  from-[#1A1540]  via-[#006B5A]  to-[#0E8E8A]
         opacity-30 sm:opacity-20 md:opacity-10
         blur-[100px] sm:blur-[130px] md:blur-[150px]
         animate-pulse delay-500
-        "></div>
+        "></div> */}
       </div>
 
       <div className="relative z-10 h-full w-full max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2">
@@ -95,7 +95,7 @@ export default function Home(){
           animate={{opacity:1}}
           transition={{delay:0.8 , duration:0.8}}
           >
-            <a href="#project"
+            <a href="#projects"
             className="px-6 py-3 rounded-full font-medium text-lg text-white
             bg-linear-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63]
             hover:scale-105 shadow-lg transition-all"
@@ -126,23 +126,54 @@ export default function Home(){
           </div>
         </div>
         <div className="relative hidden lg:block">
-          <div 
-          className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
-          style={{
-            right:"10px" ,width:"min(22vw,410px)" ,height:"min(40vw,760px)" , borderRadius:"50%",
-            filter:"blur(38px)" , opacity:0.32,
-            background : "conic-gradient(from 0deg , #1cd8d2,#00bf8f,#302b63,#1cd8d2)"
-          }}
-          />
-          <motion.img src={avator} alt="Avator" 
-          className="absolute top-1/2 -translate-y-1/2 object-contain select-none pointer-events-none"
-          style={{
-            right : "-30px" , width : "min(45vw,780px)" ,maxHeight : "90vh"
-          }}
-          initial = {{opacity:0,y:40,scale:0.98}}
-          animate ={{opacity:1,y:0,scale:1}}
-          transition={{delay:0.2 ,duration:0.8}}
-          />
+          <motion.div
+            className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
+            style={{
+              right: "-42px",
+              width: "min(50vw, 860px)",
+              height: "min(82vh, 860px)",
+            }}
+            initial={{ opacity: 0, y: 36, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.85 }}
+          >
+            <div
+              className="absolute inset-0 rounded-[3.5rem]"
+              style={{
+                background:
+                  "radial-gradient(circle at 55% 38%, rgba(28,216,210,0.34), rgba(0,0,0,0) 52%), radial-gradient(circle at 48% 58%, rgba(0,191,143,0.18), rgba(0,0,0,0) 68%)",
+                filter: "blur(18px)",
+              }}
+            />
+            <div
+              className="absolute inset-0 overflow-hidden rounded-[3.5rem] border border-white/5 bg-black/25 shadow-[0_30px_140px_rgba(0,0,0,0.72)]"
+              style={{
+                backdropFilter: "blur(4px)",
+                WebkitBackdropFilter: "blur(4px)",
+                maskImage:
+                  "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 14%, rgba(0,0,0,0.95) 38%, rgba(0,0,0,0.72) 70%, rgba(0,0,0,0) 100%), linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 8%, rgba(0,0,0,1) 18%, rgba(0,0,0,1) 82%, rgba(0,0,0,0.75) 92%, rgba(0,0,0,0) 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 14%, rgba(0,0,0,0.95) 38%, rgba(0,0,0,0.72) 70%, rgba(0,0,0,0) 100%), linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 8%, rgba(0,0,0,1) 18%, rgba(0,0,0,1) 82%, rgba(0,0,0,0.75) 92%, rgba(0,0,0,0) 100%)",
+              }}
+            >
+              <div className="absolute inset-0 bg-linear-to-b from-black/85 via-black/45 to-transparent z-10" />
+              <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black via-black/90 to-transparent z-20" />
+              <div className="absolute inset-x-0 bottom-0 h-36 bg-linear-to-t from-black via-black/88 to-transparent z-20" />
+              <div className="absolute inset-y-0 left-0 w-28 bg-linear-to-r from-black via-black/75 to-transparent z-20" />
+              <div className="absolute inset-y-0 right-0 w-28 bg-linear-to-l from-black via-black/75 to-transparent z-20" />
+              <div className="absolute inset-0 bg-linear-to-br from-white/8 via-transparent to-[#1cd8d2]/8 mix-blend-screen" />
+              <motion.img
+                src={avator3}
+                alt="Avator"
+                className="absolute inset-0 h-full w-full object-cover object-top select-none"
+                style={{
+                  transform: "scale(1.12)",
+                  filter: "contrast(1.02) saturate(0.98) brightness(0.86)",
+                  objectPosition: "center top",
+                }}
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
