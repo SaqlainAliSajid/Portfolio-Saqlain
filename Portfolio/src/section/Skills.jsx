@@ -106,7 +106,7 @@ export default function Skills(){
         whileInView={{opacity:1 , y:0}}
         transition = {{duration : 0.5 , delay:0.1}}
         > My Skills</motion.h3>
-        <motion.p className="mt-2 mb-8 text-white/90 text-base sm:text-lg z-10"
+        <motion.p className="mt-2 mb-8 text-white/90 text-base sm:text-lg text-center z-10"
         initial={{opacity:0 , y:-10}}
         whileInView = {{opacity:1 , y:0}}
         transition = {{duration : 0.5 , delay : 0.1}}

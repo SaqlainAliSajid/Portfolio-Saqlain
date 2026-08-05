@@ -92,14 +92,18 @@ export default function Experience(){
   return ()=> window.removeEventListener("resize" , checkMobile)
  },[])
 
-const SCENE_HEIGHT_VH = isMobile ? 160*experiences.length : 120*experiences.length ;
+ // show 3 items on small screens, 4 on larger screens
+ const visibleCount = isMobile ? 3 : 4;
+ const visibleExperiences = experiences.slice(0, visibleCount);
+
+const SCENE_HEIGHT_VH = isMobile ? 160*visibleExperiences.length : 120*visibleExperiences.length ;
 
 const {scrollYProgress} = useScroll({
   target:sceneRef,
   offset:["start start","end end"]
 })
 
-const thresholds = useMemo(()=> experiences.map((_,i) => (i+1)/experiences.length),[]);
+const thresholds = useMemo(()=> visibleExperiences.map((_,i) => (i+1)/Math.max(1,visibleExperiences.length)),[visibleExperiences]);
 
 const lineSize = useTransform(scrollYProgress,(v) => `${v*100}%`);
 
@@ -118,7 +122,7 @@ const lineSize = useTransform(scrollYProgress,(v) => `${v*100}%`);
                 </motion.div>
                 </div>
                 <div className="relative justify-between flex mt-0">
-                {experiences.map((experiences,idx)=>(
+                {visibleExperiences.map((experiences,idx)=>(
                   <ExperienceItem
                   key={idx}
                   exp ={experiences}
@@ -141,7 +145,7 @@ const lineSize = useTransform(scrollYProgress,(v) => `${v*100}%`);
                 ></motion.div>
                 </div>
                 <div className="reative flex flex-col pb-28 gap-10 ml-10 mt-6">
-                  {experiences.map((experiences,idx)=>(
+                  {visibleExperiences.map((experiences,idx)=>(
                   <ExperienceItem
                   key={idx}
                   exp ={experiences}
