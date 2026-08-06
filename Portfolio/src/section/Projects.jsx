@@ -47,7 +47,7 @@ export default function Projects(){
       },
       {
         title: "LearnX",
-        link: "https://www.eathungrytiger.com/",
+        link: "https://learnx-webtech.netlify.app/",
         bgColor: "#11224f",
         image: isMobile ? photo3 : img3,
       },
