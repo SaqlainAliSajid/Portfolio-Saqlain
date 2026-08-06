@@ -1,8 +1,7 @@
 import {motion} from "framer-motion"
-import {FaGithub,FaLinkedin,FaXTwitter} from "react-icons/fa6"
+import {FaGithub,FaLinkedin} from "react-icons/fa6"
 
 const socials =[
-  {Icon : FaXTwitter,label: "X",href:"https://www.youtube.com/watch?v=nyXiKPK3sVk"},
   {Icon : FaLinkedin,label: "LinkedIn",href:"https://www.linkedin.com/in/saqlain-ali-095aa0329/"},
   {Icon : FaGithub ,label: "Github",href:"https://github.com/SaqlainAliSajid"},
 ]
@@ -24,7 +23,7 @@ export default function Footer(){
          whileInView={{opacity:1 , y:0}}
          transition={{duration : 0.8}}
          >
-          <h1 className="font-semibold leading-none text-white text-3xl text-center select-none "
+          <h1 className="font-semibold leading-none text-white text-3xl text-center select-none"
           style={{fontSize:"clamp(3rem,5vw,14rem)", 
            letterSpacing:"0.02em" ,
            padding:"0.3vw" ,

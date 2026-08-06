@@ -1,12 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import ParticlesBackground from "../components/ParticlesBackground";
 import {motion} from "framer-motion";
-import {FaGithub,FaLinkedin,FaXTwitter} from "react-icons/fa6"
+import {FaGithub,FaLinkedin} from "react-icons/fa6"
 import avator3 from "../assets/avator3.png";
 
 
 const socials =[
-  {Icon : FaXTwitter,label: "X",href:"https://www.youtube.com/watch?v=nyXiKPK3sVk"},
   {Icon : FaLinkedin,label: "LinkedIn",href:"https://www.linkedin.com/in/saqlain-ali-095aa0329/"},
   {Icon : FaGithub ,label: "Github",href:"https://github.com/SaqlainAliSajid"},
 ]
