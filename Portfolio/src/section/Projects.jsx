@@ -151,8 +151,8 @@ const activeProject = projects[activeIndex];
         ))}
       </div>
       
-      <div className={`absolute ${
-        isMobile ? "bottom-20" : "bottom-10" 
+      <div className={`absolute z-20 pointer-events-auto ${
+        isMobile ? "bottom-8" : "bottom-4"
       }`}>
         <a href={activeProject?.link}
         target="_blank"
