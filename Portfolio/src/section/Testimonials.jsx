@@ -60,13 +60,13 @@ function Testimonials() {
         initial={{ opacity: 0, y: -50 }} // Start invisible & slightly above
         animate={{ opacity: 1, y: 0 }} // Fade in & slide down
         transition={{ duration: 0.6 }} // Animation duration is 0.6s
-        className="text-4xl font-bold mb-16" // Styling for title
+        className="text-3xl sm:text-4xl font-bold mb-12 sm:mb-14 text-center" // Styling for title
       >
         What People Say
       </MH2>
 
       {/* Grid for all testimonial cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10 max-w-6xl w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 max-w-5xl w-full">
         {/* Looping through testimonials array to create each card */}
         {testimonials.map((testi, idx) => (
           <MDiv
@@ -75,28 +75,28 @@ function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }} // Animate when in viewport
             transition={{ duration: 0.5, delay: idx * 0.2 }} // Stagger effect based on index
             viewport={{ once: true }} // Animate only the first time it's visible
-            className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:-rotate-1"
+            className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-5 sm:p-6 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:-rotate-1"
             // Glass effect card, rounded corners, hover animation
           >
             {/* Person Image */}
             <img
               src={testi.image} // Image from array
               alt={testi.name} // Accessibility
-              className="w-20 h-20 rounded-full border-2 border-white/40 mb-4 object-cover"
+              className="w-16 h-16 sm:w-18 sm:h-18 rounded-full border-2 border-white/40 mb-4 object-cover"
               // Circle image with border
               loading="lazy" // Lazy load for performance
             />
 
             {/* Testimonial Review Text */}
-            <p className="text-gray-200 italic mb-4">
+            <p className="text-sm sm:text-base text-gray-200 italic mb-4 leading-relaxed">
               "{testi.review}"
             </p>
 
             {/* Name of the person */}
-            <h3 className="text-lg font-semibold">{testi.name}</h3>
+            <h3 className="text-base sm:text-lg font-semibold">{testi.name}</h3>
 
             {/* Their role/job title */}
-            <p className="text-sm text-gray-400">{testi.role}</p>
+            <p className="text-xs sm:text-sm text-gray-400">{testi.role}</p>
           </MDiv>
         ))}
       </div>

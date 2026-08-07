@@ -10,6 +10,21 @@ const SERVICE_ID = import.meta.env.VITE_SERVICE_KEY;
 const TEMPLATE_KEY = import.meta.env.VITE_TEMPLATE_KEY
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const ALLOWED_EMAIL_DOMAINS = [
+  "gmail.com",
+  "yahoo.com",
+  "outlook.com",
+  "hotmail.com",
+  "live.com",
+  "icloud.com",
+  "proton.me",
+  "protonmail.com",
+  "aol.com",
+  "msn.com",
+  "mail.com",
+];
+
 export default function Contact(){
   const [formData ,setFormData] = useState({
     name : "",
@@ -34,6 +49,12 @@ export default function Contact(){
     const required = ["name" , "email" , "service" , "idea"];
     const newErrors ={};
     required.forEach((f) => !formData[f].trim() && (newErrors[f] = "Fill this Field"));
+    const trimmedEmail = formData.email.trim();
+    const emailDomain = trimmedEmail.split("@")[1]?.toLowerCase();
+    if (trimmedEmail && !EMAIL_REGEX.test(trimmedEmail))
+      newErrors.email = "Please enter a valid email address.";
+    else if (trimmedEmail && emailDomain && !ALLOWED_EMAIL_DOMAINS.includes(emailDomain))
+      newErrors.email = "Please use a Gmail, Yahoo, Outlook, Hotmail, iCloud, or other approved .com email address.";
     if(formData.service !== "other" && !formData.budget.trim())
       newErrors.budget = "Fill this Field";
     setError(newErrors);
@@ -45,6 +66,8 @@ export default function Contact(){
 
   if (!validateForm()) return;
 
+  const trimmedEmail = formData.email.trim();
+
   setStatus("sending");
 
   try {
@@ -54,7 +77,8 @@ export default function Contact(){
       {
         ...formData,
         form_name: formData.name,
-        reply_to: formData.email,
+        email: trimmedEmail,
+        reply_to: trimmedEmail,
       },
       PUBLIC_KEY
     );
@@ -84,39 +108,39 @@ export default function Contact(){
 };
 
   return (
-    <section id="contact" className="relative bg-black text-white w-full min-h-screen overflow-hidden py-20 px-6 md:px-20 flex flex-col md:flex items-center gap-10">
+    <section id="contact" className="relative bg-black text-white w-full min-h-screen overflow-hidden py-16 lg:py-20 px-5 sm:px-6 md:px-12 lg:px-16 flex flex-col md:flex items-center gap-8 lg:gap-10">
         <ParticlesBackground />
 
-        <div className="relative z-10 w-full flex flex-col md:flex-row items-center gap-10">
-      <motion.div className="w-full md:w-1/2 flex justify-center "
+        <div className="relative z-10 w-full max-w-6xl flex flex-col md:flex-row items-center gap-8 lg:gap-10">
+      <motion.div className="w-full md:w-[42%] flex justify-center "
       initial={{opacity : 0 , x:-50}}
       whileInView = {{opacity : 1 , x : 0 }}
       transition = {{duration : 0.6 }}
       >
-        <motion.img src={Astra} alt="Contact" className="w-72 md:w-140 rounded-2xl shadow-lg object-cover"
+        <motion.img src={Astra} alt="Contact" className="w-64 sm:w-72 lg:w-[28rem] rounded-2xl shadow-lg object-cover"
         animate={{y:[0,-15,0]}}
         transition={{duration:2 ,repeat:Infinity , ease : easeInOut}} />
       </motion.div>
       {/* right-side */}
-      <motion.div className="w-full md:w-1/2 bg-white/5 p-8 rounded-2xl shadow-lg border border-white/10"
+      <motion.div className="w-full md:w-[58%] bg-white/5 p-6 sm:p-7 lg:p-8 rounded-2xl shadow-lg border border-white/10 max-w-2xl"
       initial = {{opacity : 0 , x : 50}}
       whileInView = {{opacity : 1 , x :0}}
       transition={{duration : 0.6}}
       >
-        <h2 className="text-3xl font-bold  mb-6">Let's Work Together</h2>
-        <form className="flex flex-col gap-5"
+        <h2 className="text-2xl sm:text-3xl font-bold mb-5 lg:mb-6">Let's Work Together</h2>
+        <form className="flex flex-col gap-4 sm:gap-5"
         onSubmit={handleSubmit}
         >
           <div className="flex flex-col">
             <label className="mb-1">Your Name <span className="text-red-600">*</span></label>
             <input type="text" name="name" placeholder="Your Name" value={formData.name} onChange={handleChange} 
-            className={`p-3 rounded-md  bg-white/10 border ${error.name ? "border-red-500" : "border-gray-500"} text-white focus:outline-none focus:border-blue-500`}/>
+            className={`p-2.5 sm:p-3 rounded-md  bg-white/10 border ${error.name ? "border-red-500" : "border-gray-500"} text-white focus:outline-none focus:border-blue-500`}/>
             {error.name && <p className="text-red-500 text-xs">{error.name}</p>}
           </div>
           <div className="flex flex-col">
             <label className="mb-1">Your Email <span className="text-red-600">*</span></label>
             <input type="email" name="email" placeholder="Your Email" value={formData.email} onChange={handleChange} 
-            className={`p-3 rounded-md  bg-white/10 border ${error.email ? "border-red-500" : "border-gray-500"} text-white focus:outline-none focus:border-blue-500`}/>
+            className={`p-2.5 sm:p-3 rounded-md  bg-white/10 border ${error.email ? "border-red-500" : "border-gray-500"} text-white focus:outline-none focus:border-blue-500`}/>
             {error.email && <p className="text-red-500 text-xs">{error.email}</p>}
           </div>
           <div className="flex flex-col">
@@ -124,7 +148,7 @@ export default function Contact(){
             <select name="service"
             value={formData.service}
             onChange={handleChange}
-            className={`p-3 rounded-md bg-white/10  border ${error.service ? "border-red-500" : "border-gray-500"} text-white focus:outline-none focus:border-blue-500`}>
+            className={`p-2.5 sm:p-3 rounded-md bg-white/10  border ${error.service ? "border-red-500" : "border-gray-500"} text-white focus:outline-none focus:border-blue-500`}>
               <option value="" disabled>Something in mind?</option>
               <option value="Web Development" className="text-black">Web Development</option>
               <option value="Frontend Development" className="text-black">Frontend Development</option>
@@ -137,14 +161,14 @@ export default function Contact(){
             <div className="flex flex-col">
             <label className="mb-1">Your Budget <span className="text-red-600">*</span></label>
             <input type="text" name="budget" placeholder="Your Budget" value={formData.budget} onChange={handleChange} 
-            className={`p-3 rounded-md  bg-white/10 border ${error.budget ? "border-red-500" : "border-gray-500"} text-white focus:outline-none focus:border-blue-500`}/>
+            className={`p-2.5 sm:p-3 rounded-md  bg-white/10 border ${error.budget ? "border-red-500" : "border-gray-500"} text-white focus:outline-none focus:border-blue-500`}/>
             {error.budget && <p className="text-red-500 text-xs">{error.budget}</p>}
           </div>
             )}
             <div className="flex flex-col">
             <label className="mb-1">Explain Your Idea <span className="text-red-600">*</span></label>
             <textarea name="idea" rows={5} placeholder="Your Idea" value={formData.idea} onChange={handleChange} 
-            className={`p-3 rounded-md  bg-white/10 border ${error.idea ? "border-red-500" : "border-gray-500"} text-white focus:outline-none focus:border-blue-500`}/>
+            className={`p-2.5 sm:p-3 rounded-md  bg-white/10 border ${error.idea ? "border-red-500" : "border-gray-500"} text-white focus:outline-none focus:border-blue-500`}/>
             {error.idea && <p className="text-red-500 text-xs">{error.idea}</p>}
           </div>
           {status && (
@@ -170,7 +194,7 @@ export default function Contact(){
   disabled={status === "sending"}
   whileHover={{ scale: 1.05 }}
   whileTap={{ scale: 0.95 }}
-  className="bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed text-white py-3 rounded-md font-semibold transition"
+  className="bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed text-white py-2.5 sm:py-3 rounded-md font-semibold transition"
 >
   {status === "sending" ? "Sending..." : "Send Message"}
 </motion.button>

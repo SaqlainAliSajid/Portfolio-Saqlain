@@ -37,7 +37,7 @@ export default function Home(){
   
   
   return(
-    <section id="home" className="w-full h-screen bg-black relative overflow-hidden">
+    <section id="home" className="w-full min-h-screen bg-black relative overflow-hidden">
       <ParticlesBackground />
       <div className="absolute inset-0">
         <div className="absolute -top-32 -left-32
@@ -62,10 +62,10 @@ export default function Home(){
         "></div> */}
       </div>
 
-      <div className="relative z-10 h-full w-full max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2">
-        <div className="flex flex-col justify-center h-full text-center lg:text-left relative">
-          <div className="w-full lg:pr-24 mx-auto max-w-3xl">
-            <motion.div className="mb-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-wide min-h-[1.6em]" 
+      <div className="relative z-10 min-h-screen w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] gap-8 xl:gap-10 items-center">
+        <div className="flex flex-col justify-center min-w-0 h-full text-center lg:text-left relative py-20 lg:py-0">
+          <div className="w-full lg:pr-10 xl:pr-16 mx-auto max-w-2xl xl:max-w-3xl min-w-0">
+            <motion.div className="mb-3 text-lg sm:text-xl md:text-2xl lg:text-[1.7rem] xl:text-4xl font-semibold text-white tracking-wide min-h-[1.6em] leading-tight" 
             initial={{opacity:0 ,y:12}}
             animate={{opacity:1,y:0}}
             transition={{duration:0.6}}
@@ -75,36 +75,36 @@ export default function Home(){
               </span>
               <span className="inline-block w-0.5 ml-1 bg-white animate-pulse align-middle" style={{height:"1em"}}></span>
             </motion.div>
-            <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-transparent bg-clip-text
+            <motion.h1 className="text-[clamp(2.4rem,4.6vw,4.6rem)] sm:text-[clamp(2.7rem,4.2vw,5rem)] md:text-[clamp(3rem,3.8vw,5.5rem)] lg:text-[clamp(3.2rem,3.4vw,5.8rem)] text-transparent bg-clip-text leading-[0.95]
             bg-linear-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] drop-shadow-lg"
             initial={{opacity:0,y:40}}
             animate={{opacity:1,y:0}}
             transition={{duration:1}}>
               Hello, I'm
               <br />
-              <span className="text-white font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl lg:whitespace-nowrap">Saqlain Ali</span>
+              <span className="text-white font-bold text-[clamp(2.8rem,5vw,5.4rem)] sm:text-[clamp(3rem,4.5vw,5.7rem)] md:text-[clamp(3.3rem,4vw,6rem)] lg:text-[clamp(3.6rem,3.7vw,6.3rem)] lg:whitespace-nowrap">Saqlain Ali</span>
             </motion.h1>
-            <motion.p className="mt-6 text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0"
+            <motion.p className="mt-5 text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-xl xl:max-w-2xl mx-auto lg:mx-0 leading-relaxed"
             initial={{opacity:0,y:20}}
             animate={{opacity:1,y:0}}
             transition={{delay:0.4,duration:0.8}}
             >I build modern digital experiences with clean architecture, strong performance, and thoughtful design, turning complex ideas into scalable, efficient, and engaging web applications.</motion.p>
-          <motion.div className="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-6"
+          <motion.div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-5"
           initial={{opacity:0}}
           animate={{opacity:1}}
           transition={{delay:0.8 , duration:0.8}}
           >
             <a href="#projects"
-            className="px-6 py-3 rounded-full font-medium text-lg text-white
+            className="px-5 py-3 rounded-full font-medium text-base sm:text-lg text-white
             bg-linear-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63]
             hover:scale-105 shadow-lg transition-all"
             >View My Work</a>
             <a href="/Saqlain_Ali_Sajid_Resume.pdf"
-            className="px-6 py-3 rounded-full font-medium text-lg text-black bg-white hover:bg-gray-200 shadow-lg hover:scale-105 transition-all"
+            className="px-5 py-3 rounded-full font-medium text-base sm:text-lg text-black bg-white hover:bg-gray-200 shadow-lg hover:scale-105 transition-all"
             >My Resume</a>
           </motion.div>
 
-          <div className="mt-10 flex gap-5 text-2xl md:text-3xl justify-center lg:justify-start">
+          <div className="mt-8 flex gap-5 text-2xl md:text-3xl justify-center lg:justify-start">
             {socials.map(({Icon,label,href})=>(
             <motion.a 
             href={href}
@@ -124,13 +124,13 @@ export default function Home(){
           </div>
           </div>
         </div>
-        <div className="relative hidden lg:block">
+        <div className="relative hidden lg:block min-w-0">
           <motion.div
             className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
             style={{
-              right: "-42px",
-              width: "min(50vw, 860px)",
-              height: "min(82vh, 860px)",
+              right: "-10px",
+              width: "min(40vw, 680px)",
+              height: "min(72vh, 680px)",
             }}
             initial={{ opacity: 0, y: 36, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -166,8 +166,8 @@ export default function Home(){
                 alt="Avator"
                 className="absolute inset-0 h-full w-full object-cover object-top select-none"
                 style={{
-                  transform: "scale(1.12)",
-                  filter: "contrast(1.02) saturate(0.98) brightness(0.86)",
+                  transform: "scale(1.06)",
+                  filter: "contrast(1.02) saturate(0.98) brightness(0.88)",
                   objectPosition: "center top",
                 }}
               />
